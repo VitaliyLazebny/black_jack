@@ -4,20 +4,15 @@
 #
 # Suits: 'Diamond', 'Spade', 'Club', 'Heart'
 class Card
-  SUITS = {Diamond: "\u25C6",
-           Spade:   "\u2660",
-           Club:    "\u2663",
-           Heart:   "\u2665"}.freeze
-  NAMES = {Six:          6,
-           Seven:        7,
-           Eight:        8,
-           Nine:         9,
-           Ten:         10,
-           Jack:         2,
-           Queen:        3,
-           Кing:         4,
-           Ace:          5,
-           'Wild card': 11}.freeze
+  SUITS = { Diamond: "\u25C6",
+            Spade:   "\u2660",
+            Club:    "\u2663",
+            Heart:   "\u2665" }.freeze
+  NAMES = [2, 3, 4, 5, 6, 7, 8, 9,
+           'Jack',
+           'Queen',
+           'Кing',
+           'Ace'].freeze
 
   def self.SUITS_LIST
     SUITS.keys
@@ -28,19 +23,17 @@ class Card
   end
 
   attr_reader :suit
+  attr_reader :name
 
   def initialize(suit, name)
     @suit   = suit
     @name   = name
   end
 
-  def name
-    return points if points.between?(6, 10)
-    @name
-  end
-
   def points
-    NAMES[@name]
+    return 11 if @name       == :Ace
+    return 10 if @name.class == String
+    @name
   end
 
   def to_s
