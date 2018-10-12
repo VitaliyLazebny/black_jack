@@ -10,6 +10,4 @@ class Trump
       end
     end
   end
-
-
 end

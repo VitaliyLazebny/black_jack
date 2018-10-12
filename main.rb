@@ -6,3 +6,6 @@ puts
 
 puts "Hello, #{username}."
 
+trump = Trump.new
+
+
