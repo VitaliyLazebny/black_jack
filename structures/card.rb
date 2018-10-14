@@ -19,7 +19,7 @@ class Card
   end
 
   def self.NAMES_LIST
-    NAMES.keys
+    NAMES
   end
 
   attr_reader :suit
