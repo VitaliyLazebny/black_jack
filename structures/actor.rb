@@ -10,10 +10,14 @@ def Actor
   end
 
   def bet
-    fail "I'm bankrupt" if bankrupt?
+    fail "It's #{self}. I'm bankrupt and can't bet" if bankrupt?
 
     @money -= @bet
     @bet
+  end
+
+  def take_cards(number = 1)
+    puts "#{self}. I'm taking #{number} cards."
   end
 
   def bankrupt?
@@ -27,6 +31,4 @@ def Actor
   def to_s
     name
   end
-
-
 end
