@@ -1,7 +1,5 @@
-def Dealer
-  attr_reader :cards
-
-  def initialize(cards)
-    @cards = cards
+def Dealer < Actor
+  def name
+    'dealer'
   end
 end

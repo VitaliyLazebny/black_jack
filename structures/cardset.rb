@@ -9,7 +9,7 @@ class Cardset
   def generate_set
     Card.NAMES_LIST.each do |n|
       Card.SUITS_LIST.each do |s|
-        @cards.push Card.new(s, n)
+        @cards.push Card.new(self, s, n)
       end
     end
   end

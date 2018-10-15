@@ -1,19 +1,13 @@
+require_relative 'structures/game'
+
 require_relative 'structures/card'
-require_relative 'structures/trump'
+require_relative 'structures/cardset'
 require_relative 'structures/pot'
 
-puts "Welcome in 'Black Jack' game!"
-puts
-puts "Please enter your name:"
-username = gets.chomp
-puts
+require_relative 'structures/actor'
+require_relative 'structures/dealer'
+require_relative 'structures/player'
 
-puts "Hello, #{username}."
-
-trump = Cardset.new('trump')
-trump.generate_set
-
-money = Money.new
 
 dealer_cards = Cardset.new('dealer')
 gamer_cards  = Cardset.new(username)

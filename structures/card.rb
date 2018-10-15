@@ -24,10 +24,12 @@ class Card
 
   attr_reader :suit
   attr_reader :name
+  attr_reader :set
 
-  def initialize(suit, name)
+  def initialize(set, suit, name)
     @suit   = suit
     @name   = name
+    @set    = set
   end
 
   def points
