@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Game defines rules and sequencing
 class Game
   attr_reader :players
   attr_reader :trump
@@ -7,8 +8,8 @@ class Game
 
   def initialize
     @players = [
-        Player.new,
-        Dealer.new('Dealer 1'),
+      Player.new,
+      Dealer.new('Dealer 1')
     ]
 
     take_new_trump
@@ -17,7 +18,7 @@ class Game
       p.set_trump(@trump)
     end
 
-    @bank  = 0
+    @bank = 0
   end
 
   def play
@@ -33,9 +34,7 @@ class Game
 
     display_bank
 
-    @players.each do |p|
-      p.make_a_move
-    end
+    @players.each(&:make_a_move)
 
     award(winner)
 
@@ -52,7 +51,7 @@ class Game
   end
 
   def take_new_trump
-    puts "New trump used in game."
+    puts 'New trump used in game.'
     @trump = Cardset.new('trump')
     @trump.generate_set
   end
@@ -61,21 +60,21 @@ class Game
     if winner
       winner.get_win(@bank)
     else
-      @players.each {|p| p.get_win(p.bet)}
+      @players.each { |p| p.get_win(p.bet) }
     end
 
     @bank = 0
   end
 
   def winner
-    players = @players.reject {|p| p.overpoints? }
-    players.sort!{|x, y| x.points <=> y.points}
+    players = @players.reject(&:overpoints?)
+    players.sort! { |x, y| x.points <=> y.points }
 
     players.last
   end
 
   def welcome
-    puts "Welcome in 'Black Jack' game!"
+    puts 'Welcome in \'Black Jack\' game!'
     puts
 
     @players.each { |p| puts "Hello, #{p}" }
@@ -96,7 +95,7 @@ class Game
 
   def congrats_winner
     puts "Game ended. Winner is #{@players.first}."
-    puts "Congrats!"
+    puts 'Congrats!'
   end
 
   def display_bank

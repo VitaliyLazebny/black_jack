@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Names: 'Six', 'Seven', 'Eight', 'Nine',
-#        'Ten', 'Jack', 'Queen', 'Кing',
+#        'Ten', 'Jack', 'Queen', 'King',
 #        'Ace', 'Wild card'
 #
 # Suits: 'Diamond', 'Spade', 'Club', 'Heart'
@@ -16,11 +16,11 @@ class Card
            'Кing',
            'Ace'].freeze
 
-  def self.SUITS_LIST
+  def self.suits_list
     SUITS.keys
   end
 
-  def self.NAMES_LIST
+  def self.names_list
     NAMES
   end
 

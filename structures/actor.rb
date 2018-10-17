@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base class for players: human and computer
 class Actor
   attr_reader   :cards
   attr_reader   :money
@@ -7,9 +8,9 @@ class Actor
 
   def initialize(name)
     @name  = name
-    discard_cards
     @money = 100
     @bet   = 10
+    discard_cards
   end
 
   def set_trump(trump)

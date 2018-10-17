@@ -13,6 +13,4 @@ require_relative 'structures/player'
 i    = 0
 game = Game.new
 
-while game.play do
-  puts "Round number #{i = i + 1}"
-end
+puts "Round number #{i += 1}" while game.play

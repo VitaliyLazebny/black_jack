@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Deck or players cards
 class Cardset
   attr_reader :cards
 
@@ -9,33 +10,30 @@ class Cardset
   end
 
   def generate_set
-    Card.NAMES_LIST.each do |n|
-      Card.SUITS_LIST.each do |s|
+    Card.names_list.each do |n|
+      Card.suits_list.each do |s|
         @cards.push Card.new(s, n)
       end
     end
   end
 
   def give(number = 2)
-    #puts "Taken 2 cards from #{@owner}"
-    to_give  = @cards.sample(number)
+    to_give = @cards.sample(number)
     @cards.delete(to_give)
 
     to_give
   end
 
   def receive(arr)
-    #puts "#{@owner}. I'm taking #{arr.size} card(-s)."
-
     @cards += arr
   end
 
   def to_s
-    @cards.join ", "
+    @cards.join ', '
   end
 
   def points
-    @cards.inject(0){|sum, c| sum + c.points }
+    @cards.inject(0) { |sum, c| sum + c.points }
   end
 
   def overheat?

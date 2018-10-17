@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
+# Human player class.
+# To make move used users input.
 class Player < Actor
   def initialize
-
     super(name)
   end
 
   def name
     unless @name
-      puts "Please enter your name:"
+      puts 'Please enter your name:'
       @name = gets.chomp
       puts
     end
@@ -17,10 +18,10 @@ class Player < Actor
   end
 
   def display_moves
-    puts "Please choose move:"
-    puts "1. Get a card."
-    puts "2. Skip step."
-    puts "3. Open cards."
+    puts 'Please choose move:'
+    puts '1. Get a card.'
+    puts '2. Skip step.'
+    puts '3. Open cards.'
   end
 
   def make_a_move
