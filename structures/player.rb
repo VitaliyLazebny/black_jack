@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Player < Actor
   def initialize
 
@@ -29,10 +31,11 @@ class Player < Actor
     case i.to_i
     when 1
       take_card
-    when 2
-      puts "#{self}. Do nothing."
     when 3
       puts "#{self}. Want to open cards."
+    else
+      # including 2
+      puts "#{self}. Do nothing."
     end
   end
 end

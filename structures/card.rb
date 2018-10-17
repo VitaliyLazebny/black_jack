@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Names: 'Six', 'Seven', 'Eight', 'Nine',
 #        'Ten', 'Jack', 'Queen', 'Кing',
 #        'Ace', 'Wild card'
@@ -24,12 +26,10 @@ class Card
 
   attr_reader :suit
   attr_reader :name
-  attr_reader :set
 
-  def initialize(set, suit, name)
+  def initialize(suit, name)
     @suit   = suit
     @name   = name
-    @set    = set
   end
 
   def points

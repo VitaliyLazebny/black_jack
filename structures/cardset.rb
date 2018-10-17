@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cardset
   attr_reader :cards
 
@@ -9,7 +11,7 @@ class Cardset
   def generate_set
     Card.NAMES_LIST.each do |n|
       Card.SUITS_LIST.each do |s|
-        @cards.push Card.new(self, s, n)
+        @cards.push Card.new(s, n)
       end
     end
   end

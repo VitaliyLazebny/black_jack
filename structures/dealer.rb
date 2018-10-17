@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class Dealer < Actor
   def make_a_move
-    case
-    when @cards.points > 17
+    if @cards.points > 17
       puts "#{self}. Do nothing."
-    when @cards.points <= 17
+    else
       take_card
     end
   end
