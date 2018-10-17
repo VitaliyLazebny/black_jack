@@ -8,4 +8,8 @@ class Player < Actor
 
     @name
   end
+
+  def make_a_move
+
+  end
 end

@@ -15,7 +15,7 @@ class Cardset
   end
 
   def give(number = 2)
-    puts "Taken 2 cards from #{@owner}"
+    #puts "Taken 2 cards from #{@owner}"
     to_give  = @cards.sample(number)
     @cards.delete(to_give)
 
@@ -23,7 +23,7 @@ class Cardset
   end
 
   def receive(arr)
-    puts "Received 2 cards by #{@owner}"
+    #puts "#{@owner}. I'm taking #{arr.size} card(-s)."
 
     @cards += arr
   end

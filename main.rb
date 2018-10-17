@@ -8,13 +8,9 @@ require_relative 'structures/actor'
 require_relative 'structures/dealer'
 require_relative 'structures/player'
 
+i = 0
 
-dealer_cards = Cardset.new('dealer')
-gamer_cards  = Cardset.new(username)
-
-dealer_cards.receive(trump.give(2))
-gamer_cards.receive(trump.give(2))
-
-puts "Dealer have 2 cards. You can't see them."
-puts "You have: #{gamer_cards}. It's #{gamer_cards.points} total."
-
+game = Game.new
+while game.play do
+  puts i = i + 1
+end
