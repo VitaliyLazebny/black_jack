@@ -5,9 +5,8 @@ class Game
 
   def initialize
     @players = [
+        Player.new,
         Dealer.new('Dealer 1'),
-        Dealer.new('Dealer 2'),
-        Dealer.new('Dealer 3')
     ]
 
     take_new_trump
@@ -38,13 +37,14 @@ class Game
 
     award(winner)
 
-    reject_bankrupts
-
     @players.each do |p|
+      puts "#{p}. Had #{p.cards}. Total: #{p.points}."
       p.discard_cards
     end
 
     take_new_trump
+
+    reject_bankrupts
 
     true
   end
@@ -68,8 +68,6 @@ class Game
   def winner
     players = @players.reject {|p| p.overpoints? }
     players.sort!{|x, y| x.points <=> y.points}
-
-    puts "#{players.map {|p| "#{p.name} #{p.points}"}} "
 
     players.last
   end

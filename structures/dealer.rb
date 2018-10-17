@@ -1,8 +1,4 @@
 class Dealer < Actor
-  # def name
-  #   'dealer'
-  # end
-
   def make_a_move
     case
     when @cards.points > 17
@@ -10,5 +6,9 @@ class Dealer < Actor
     when @cards.points <= 17
       take_card
     end
+  end
+
+  def display_cards
+    puts "#{self}. Don't want to show cards."
   end
 end

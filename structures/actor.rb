@@ -1,5 +1,4 @@
 class Actor
-  #attr_accessor :name
   attr_reader   :cards
   attr_reader   :money
   attr_accessor :bet
@@ -31,14 +30,16 @@ class Actor
   end
 
   def get_win(money)
+
     @money += money
     puts "#{self}. Got a win #{money} dollars."
   end
 
   def take_cards(number = 2)
+    puts "#{self}. I'm taking #{number} card#{number == 1 ? '' : 's'}."
+
     cards = @trump.give(number)
     @cards.receive(cards)
-    puts "#{self}. I'm taking #{number} card#{number == 1 ? '' : 's'}."
     display_cards
   end
 
@@ -60,10 +61,6 @@ class Actor
 
   def points
     @cards.points
-  end
-
-  def name=(name)
-    @name = name if name
   end
 
   def name
