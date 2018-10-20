@@ -5,13 +5,13 @@
 class Dealer < Actor
   def make_a_move
     if @cards.points > 17
-      puts "#{self}. Do nothing."
+      game.interface.say "#{self}. Do nothing."
     else
       take_card
     end
   end
 
   def display_cards
-    puts "#{self}. Don't want to show cards."
+    game.interface.say "#{self}. Don't want to show cards."
   end
 end

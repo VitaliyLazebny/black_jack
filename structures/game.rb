@@ -2,14 +2,17 @@
 
 # Game defines rules and sequencing
 class Game
-  attr_reader :players
-  attr_reader :trump
-  attr_reader :bank
+  attr_accessor :interface
+  attr_reader   :players
+  attr_reader   :trump
+  attr_reader   :bank
 
-  def initialize
+  def initialize(interface)
+    @interface = interface
+
     @players = [
-      Player.new,
-      Dealer.new('Dealer 1')
+      Player.new(self),
+      Dealer.new(self,'Dealer 1')
     ]
 
     take_new_trump
@@ -39,7 +42,7 @@ class Game
     award(winner)
 
     @players.each do |p|
-      puts "#{p}. Had #{p.cards}. Total: #{p.points}."
+      interface.say "#{p}. Had #{p.cards}. Total: #{p.points}."
       p.discard_cards
     end
 
@@ -51,7 +54,7 @@ class Game
   end
 
   def take_new_trump
-    puts 'New trump used in game.'
+    interface.say 'New trump used in game.'
     @trump = Cardset.new('trump')
     @trump.generate_set
   end
@@ -74,16 +77,15 @@ class Game
   end
 
   def welcome
-    puts 'Welcome in \'Black Jack\' game!'
-    puts
+    interface.say 'Welcome in \'Black Jack\' game!'
 
-    @players.each { |p| puts "Hello, #{p}" }
+    @players.each { |p| interface.say "Hello, #{p}" }
   end
 
   def reject_bankrupts
     @players.reject! do |p|
       if p.bankrupt?
-        puts "Player #{p} is bankrupt and leaving game."
+        interface.say "Player #{p} is bankrupt and leaving game."
         true
       end
     end
@@ -94,11 +96,11 @@ class Game
   end
 
   def congrats_winner
-    puts "Game ended. Winner is #{@players.first}."
-    puts 'Congrats!'
+    interface.say "Game ended. Winner is #{@players.first}. \n"\
+      'Congrats!'
   end
 
   def display_bank
-    puts "Bank contains #{@bank} dollars."
+    interface.say "Bank contains #{@bank} dollars."
   end
 end
