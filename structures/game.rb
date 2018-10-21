@@ -2,10 +2,10 @@
 
 # Game defines rules and sequencing
 class Game
-  attr_accessor :interface
-  attr_reader   :players
-  attr_reader   :trump
-  attr_reader   :bank
+  attr_reader :interface
+  attr_reader :players
+  attr_reader :trump
+  attr_reader :bank
 
   def initialize(interface)
     @interface = interface
