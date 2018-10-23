@@ -2,16 +2,26 @@
 
 # Game defines rules and sequencing
 class Game
+  STEPS = %i[ congrats_winner
+              all_players_bet
+              all_players_take_cards
+              display_bank
+              players_make_move
+              award_winner
+              players_show_cards
+              take_new_trump
+              reject_bankrupts ].freeze
+
   attr_reader :interface
   attr_reader :players
   attr_reader :trump
   attr_reader :bank
 
-  attr_reader :current_step
+  attr_reader :congrats_winner
 
   def initialize(interface)
     @interface = interface
-    @bank = 0
+    @bank      = 0
 
     @players = [
       #Player.new(self),
@@ -24,6 +34,19 @@ class Game
     @players.each do |p|
       p.set_trump(@trump)
     end
+
+    @current_step = STEPS[0]
+  end
+
+  def execute_current_step
+    send @current_step
+
+    next_step_id  = (STEPS.index @current_step) + 1
+
+    @current_step =
+        STEPS[next_step_id] ? STEPS[next_step_id] : STEPS[0]
+
+    !have_winner?
   end
 
   def play

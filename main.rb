@@ -14,4 +14,4 @@ require_relative 'structures/player'
 i = 0
 
 interface = InterfaceText.new
-interface.say "Round number #{i += 1}" while interface.game.play
+interface.say "Round number #{i += 1}" while interface.game.execute_current_step
