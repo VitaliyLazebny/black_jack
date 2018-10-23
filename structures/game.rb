@@ -7,13 +7,16 @@ class Game
   attr_reader :trump
   attr_reader :bank
 
+  attr_reader :current_step
+
   def initialize(interface)
     @interface = interface
     @bank = 0
 
     @players = [
-      Player.new(self),
-      Dealer.new(self,'Dealer 1')
+      #Player.new(self),
+      Dealer.new(self, 'Dealer 1'),
+      Dealer.new(self, 'Dealer 2')
     ]
 
     take_new_trump
@@ -66,8 +69,6 @@ class Game
   end
 
   def winner
-    return nil unless have_winner?
-
     players = @players.reject(&:overpoints?)
     players.sort! { |x, y| x.points <=> y.points }
 
