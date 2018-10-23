@@ -9,10 +9,12 @@ class InterfaceText
   end
 
   def start_game
-    i = 0
+    continue = true
+    i        = 0
 
-    while interface.game.execute_current_step do
-      say "Round number #{i += 1}"
+    while continue do
+      continue, interraction = game.execute_current_step
+      say "Step number #{i += 1}"
     end
   end
 

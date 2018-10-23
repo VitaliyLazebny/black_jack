@@ -39,14 +39,14 @@ class Game
   end
 
   def execute_current_step
-    send @current_step
+    result = send @current_step
 
     next_step_id  = (STEPS.index @current_step) + 1
 
     @current_step =
         STEPS[next_step_id] ? STEPS[next_step_id] : STEPS[0]
 
-    !have_winner?
+    [!have_winner?, result]
   end
 
   def play
