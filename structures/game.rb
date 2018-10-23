@@ -17,8 +17,6 @@ class Game
   attr_reader :trump
   attr_reader :bank
 
-  attr_reader :congrats_winner
-
   def initialize(interface)
     @interface = interface
     @bank      = 0
