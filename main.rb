@@ -11,7 +11,7 @@ require_relative 'structures/dealer'
 require_relative 'structures/player'
 
 # round number
-i    = 0
+i = 0
 
 interface = InterfaceText.new
 interface.say "Round number #{i += 1}" while interface.game.play
