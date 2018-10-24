@@ -12,6 +12,10 @@ class Game
            'Кing',
            'Ace'].freeze
 
+  attr_reader :player_money,
+              :dealer_money,
+              :bank_money
+
   def initialize
     @player_money = 100
     @dealer_money = 100
@@ -92,7 +96,7 @@ class Game
   end
 
   def player(action)
-    call action
+    send action
   end
 
   def get_card
@@ -101,9 +105,41 @@ class Game
     @player_cards += for_player
   end
 
-  def open_cards
+  def open_cards; end
 
+  def skip_step
+    for_dealer = @cards.sample 1
+    @cards.delete for_dealer
+    @dealer_cards += for_dealer
   end
 
-  def skip_step; end
+  def round_winner
+    if (player_points > 21 && dealer_points > 21) ||
+       (player_points      == dealer_points)
+      return nil
+    end
+
+    return :dealer if player_points > 21
+    return :player if dealer_points > 21
+
+    if player_points > dealer_points
+      return :player
+    end
+
+    :dealer
+  end
+
+  def award_winner
+    case round_winner
+    when :player
+      @player_money += @bank_money
+    when :dealer
+      @dealer_money += @bank_money
+    else
+      @player_money += @bank_money/2
+      @dealer_money += @bank_money/2
+    end
+
+    @bank_money = 0
+  end
 end
