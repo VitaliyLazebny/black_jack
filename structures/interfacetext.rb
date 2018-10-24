@@ -15,6 +15,7 @@ class InterfaceText
     while continue do
       continue, interraction = game.execute_current_step
       say "Step number #{i += 1}"
+      say game.get_for_interface
     end
   end
 

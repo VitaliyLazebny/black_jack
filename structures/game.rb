@@ -12,13 +12,16 @@ class Game
               take_new_trump
               reject_bankrupts ].freeze
 
-  attr_reader :interface
-  attr_reader :players
-  attr_reader :trump
-  attr_reader :bank
+  attr_reader   :players
+  attr_reader   :trump
+  attr_reader   :bank
 
-  def initialize(interface)
-    @interface = interface
+  attr_reader   :interface
+
+  def initialize(interf)
+
+    @interface = interf
+    @interface_= ''
     @bank      = 0
 
     @players = [
@@ -34,6 +37,17 @@ class Game
     end
 
     @current_step = STEPS[0]
+  end
+
+  def send_to_interface(text)
+    @interface_ += text
+  end
+
+  def get_for_interface
+    result     = @interface_
+    @interface_ = ''
+
+    result
   end
 
   def execute_current_step
@@ -63,14 +77,14 @@ class Game
   end
 
   def take_new_trump
-    interface.say 'New trump used in game.'
+    send_to_interface 'New trump used in game.'
     @trump = Cardset.new('trump')
     @trump.generate_set
   end
 
   def players_show_cards
     @players.each do |p|
-      interface.say "#{p}. Had #{p.cards}. Total: #{p.points}."
+      send_to_interface "#{p}. Had #{p.cards}. Total: #{p.points}."
       p.discard_cards
     end
   end
@@ -97,15 +111,15 @@ class Game
   end
 
   def welcome
-    interface.say 'Welcome in \'Black Jack\' game!'
+    send_to_interface 'Welcome in \'Black Jack\' game!'
 
-    @players.each { |p| interface.say "Hello, #{p}" }
+    @players.each { |p| send_to_interface "Hello, #{p}" }
   end
 
   def reject_bankrupts
     @players.reject! do |p|
       if p.bankrupt?
-        interface.say "Player #{p} is bankrupt and leaving game."
+        send_to_interface "Player #{p} is bankrupt and leaving game."
         true
       end
     end
@@ -128,13 +142,13 @@ class Game
   def congrats_winner
     return false unless have_winner?
 
-    interface.say "Game ended. Winner is #{@players.first}. \n"\
-      'Congrats!'
+    send_to_interface "Game ended. Winner is #{@players.first}.\n"
+    send_to_interface 'Congrats!'
 
     true
   end
 
   def display_bank
-    interface.say "Bank contains #{@bank} dollars."
+    send_to_interface "Bank contains #{@bank} dollars."
   end
 end
