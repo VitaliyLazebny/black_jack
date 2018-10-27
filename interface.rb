@@ -18,8 +18,8 @@ class Interface
     loop do
       @game.start_round
 
-      puts "Dealer have #{@game.dealer_points} points."
-      puts "You have #{@game.player_points} points."
+      puts "Dealer have ** points."
+      puts "You have #{@game.points(:player)} points."
 
       puts "You can:"
       puts "1. Get one more card."
@@ -38,10 +38,15 @@ class Interface
         puts "There's no winner."
       end
 
+      puts "Dealer's points '#{@game.points(:dealer)}'"
+      puts 'vs'
+      puts "Player's points: '#{@game.points(:player)}'"
+      3.times { puts }
+
       @game.award_winner
 
-      break if @game.player_money.zero? ||
-               @game.dealer_money.zero?
+      break if @game.player_money.zero?
+      break if @game.dealer_money.zero?
     end
 
     puts 'Game finished.'
