@@ -26,7 +26,10 @@ class Interface
       puts "1. Get one more card."
       puts "2. Open cards."
       puts "3. Skip your step."
+
       i = gets.chomp.to_i
+      raise "Invalid input if" if i < 1 || i > 3
+
       action = [:get_card, :open_cards, :skip_step][i-1]
       @game.execute(action)
 
@@ -53,7 +56,7 @@ class Interface
     end
 
     puts 'Game finished.'
-    puts "Dealer has: $#{@game.dealer_money}"
-    puts "Player has: $#{@game.player_money}"
+    puts "Dealer has: $#{@game.dealer.money}"
+    puts "Player has: $#{@game.player.money}"
   end
 end
