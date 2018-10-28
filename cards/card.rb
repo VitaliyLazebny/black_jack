@@ -27,7 +27,7 @@ class Card
   # Aces points deviation is corrected at
   # Hand.points method
   def points
-    return 11 if @name       == :Ace
+    return 11 if @name       == 'Ace'
     return 10 if @name.class == String
     @name
   end

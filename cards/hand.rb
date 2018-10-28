@@ -20,7 +20,7 @@ class Hand < Cardset
     if result > 21
       # supposed that actor can't have more then 3 cards
       # and more then 3 Aces.
-      case @cards.select {|c| c.name == :Ace}.size
+      case @cards.select {|c| c.name == 'Ace'}.size
       when 1, 2
         result -= 10
       when 3
