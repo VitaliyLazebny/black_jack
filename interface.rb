@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Interaction of game via console
 class Interface
   def initialize(game)
     @game = game
@@ -8,12 +9,17 @@ class Interface
     play
   end
 
+  # Used to great user,
+  # does not affect the gameplay
   def ask_name
     puts "Please, enter your name:"
     name = gets.chomp
     puts "Hello #{name}"
   end
 
+  # Infinite loop
+  # the only goal is to move the game forward
+  # while player and dealer have money
   def play
     loop do
       @game.start_round

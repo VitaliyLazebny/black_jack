@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Deck < Cardset
+  # Each game has brand new deck
   def generate_set
     Card::NAMES.each do |n|
       Card::SUITS.keys.each do |s|
@@ -9,6 +10,7 @@ class Deck < Cardset
     end
   end
 
+  # Cards from deck are going to Actor's cardset
   def give(number = 2)
     to_give = @cards.sample(number)
 
