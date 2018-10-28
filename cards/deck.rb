@@ -2,8 +2,8 @@
 
 class Deck < Cardset
   def generate_set
-    Card.names_list.each do |n|
-      Card.suits_list.each do |s|
+    Card::NAMES.each do |n|
+      Card::SUITS.keys.each do |s|
         @cards.push Card.new(s, n)
       end
     end

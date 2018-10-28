@@ -16,14 +16,6 @@ class Card
            'Кing',
            'Ace'].freeze
 
-  def self.suits_list
-    SUITS.keys
-  end
-
-  def self.names_list
-    NAMES
-  end
-
   attr_reader :suit
   attr_reader :name
 
