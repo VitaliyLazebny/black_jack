@@ -1,53 +1,66 @@
 # frozen_string_literal: true
 
 class Game
-  include Deck
-
-  attr_reader :player_money,
-              :dealer_money,
-              :bank_money
+  attr_reader :player,
+              :dealer,
+              :bank_money,
+              :deck
 
   def initialize
-    @player_money = 100
-    @dealer_money = 100
-    @bank_money   = 0
-
-    generate_cardset
+    @player     = Player.new
+    @dealer     = Dealer.new
+    @deck       = Deck.new
+    @bank_money = 0
   end
 
 
   def start_round
     take_money
-    reset_cards
+    discart_cards
     turn_cards
   end
 
   def take_money
-    @player_money -= 10
-    @dealer_money -= 10
-    @bank_money   += 20
+    @bank_money += @player.bet + @dealer.bet
   end
 
-  def player(action)
+  def discart_cards
+    @deck.generate_set
+    @dealer.discart_cards
+    @player.discart_cards
+  end
+
+  def turn_cards
+    @dealer.take_cards(@deck.give 2)
+    @player.take_cards(@deck.give 2)
+
+    puts
+  end
+
+  def execute(action)
     send action
   end
 
   def skip_step
-    return if points(:dealer) > 16
+    return if @dealer.points > 16
 
-    for_dealer = @cards.sample 1
-    @cards.delete for_dealer
-    @dealer_cards += for_dealer
+    @dealer.take_cards(@deck.give(1))
+  end
+
+  def open_cards; end
+
+  def get_card
+    @player.take_cards(@deck.give(1))
   end
 
   def round_winner
-    return if points(:player) > 21 && points(:dealer) > 21
-    return if points(:player)      == points(:dealer)
+    return if @player.overheat? && @dealer.overheat?
+    return if @player.points    == @dealer.points
 
-    return :player if points(:dealer) > 21
-    return :dealer if points(:player) > 21
+    return :player if @dealer.overheat?
+    return :dealer if @player.overheat?
 
-    return :player if points(:player) > points(:dealer)
+    return :player if @player.points > @dealer.points
 
     :dealer
   end
@@ -55,12 +68,12 @@ class Game
   def award_winner
     case round_winner
     when :player
-      @player_money += @bank_money
+      @player.pick_up_winnings @bank_money
     when :dealer
-      @dealer_money += @bank_money
+      @dealer.pick_up_winnings @bank_money
     else
-      @player_money += @bank_money/2
-      @dealer_money += @bank_money/2
+      @player.pick_up_winnings @bank_money/2
+      @dealer.pick_up_winnings @bank_money/2
     end
 
     @bank_money = 0
