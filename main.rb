@@ -3,14 +3,14 @@
 require_relative 'interface'
 require_relative 'game'
 
-require_relative 'actor'
-require_relative 'dealer'
-require_relative 'player'
+require_relative 'actors/actor'
+require_relative 'actors/dealer'
+require_relative 'actors/player'
 
-require_relative 'card'
-require_relative 'cardset'
-require_relative 'deck'
-require_relative 'hand'
+require_relative 'cards/card'
+require_relative 'cards/cardset'
+require_relative 'cards/deck'
+require_relative 'cards/hand'
 
 game = Game.new
 Interface.new(game)
