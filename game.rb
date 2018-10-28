@@ -33,8 +33,6 @@ class Game
   def turn_cards
     @dealer.take_cards(@deck.give 2)
     @player.take_cards(@deck.give 2)
-
-    puts
   end
 
   def execute(action)
