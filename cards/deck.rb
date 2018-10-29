@@ -5,7 +5,7 @@ class Deck < Cardset
   def generate_set
     Card::NAMES.each do |n|
       Card::SUITS.keys.each do |s|
-        @cards.push Card.new(s, n)
+        @cards << Card.new(s, n)
       end
     end
   end
